@@ -19,14 +19,14 @@ class Solution:
             return list2
         if list2 is None:
             return list1
-        
+
         if list1.val <= list2.val:
             head = list1
             list1 = list1.next
         else:
             head = list2
             list2 = list2.next
-        
+
         curr = head
         while list1 or list2:
             if list1 is None:
@@ -35,13 +35,12 @@ class Solution:
             elif list2 is None:
                 curr.next = list1
                 list1 = list1.next
+            elif list1.val <= list2.val:
+                curr.next = list1
+                list1 = list1.next
             else:
-                if list1.val <= list2.val:
-                    curr.next = list1
-                    list1 = list1.next
-                else:
-                    curr.next = list2
-                    list2 = list2.next
+                curr.next = list2
+                list2 = list2.next
             curr = curr.next
 
         return head
