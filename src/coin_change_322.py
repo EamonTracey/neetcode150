@@ -15,17 +15,16 @@ class Solution:
 
         def coin_helper(amount):
             if amount < 0:
-                return -1
-            
+                return float("inf")
+
             if amount not in memo:
                 decisions = (coin_helper(amount - coin) for coin in coins)
-                all_fail = True
                 mindec = float("inf")
                 for dec in decisions:
-                    if dec != -1:
-                        all_fail = False
-                        mindec = min(mindec, dec)
-                memo[amount] = -1 if all_fail else 1 + mindec
+                    mindec = min(mindec, dec)
+                memo[amount] = 1 + mindec
             return memo[amount]
-        
-        return coin_helper(amount)
+
+        sol = coin_helper(amount)
+        return -1 if sol == float("inf") else sol
+
